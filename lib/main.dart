@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
+import 'barcode_scanner.dart';
 
 //*******************************************************************************
 // Author: Tyler Scotti
@@ -65,30 +66,30 @@ class MyHomePage extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                         )),
                     background: Image.asset(        // Set the background image.
-                      "C:/FridgeMateProject/FridgeMate/assets/Fridgephoto.png",
+                      "assets/Fridgephoto.png",
                       fit: BoxFit.cover,            // Cover the entire background with the image.
                     ),
                   ),
                 ),
-                SliverPersistentHeader(             // Create a SliverPersistentHeader for the tab bar.
-                  delegate: _SliverAppBarDelegate(  // Use a custom delegate to manage the tab bar.
-                    const TabBar(                   // Create the TabBar widget.
-                      indicatorSize: TabBarIndicatorSize.label, // Set the indicator size to match the label.
-                      labelColor: Colors.purple, // Set the label color to purple.
-                      unselectedLabelColor: Colors.grey, // Set the unselected label color to grey.
-                      tabs: _tabs,                  // Use the _tabs list to define the tabs.
+                SliverPersistentHeader(             // Create a SliverPersistentHeader for the tab bar
+                  delegate: _SliverAppBarDelegate(  // establish custom delegate
+                    const TabBar(                   // Create the TabBar widget
+                      indicatorSize: TabBarIndicatorSize.label, // Set the indicator size to match the label
+                      labelColor: Colors.purple, // Set the label color to purple
+                      unselectedLabelColor: Colors.grey, // Set the unselected label color to grey
+                      tabs: _tabs,                  // Use the _tabs list to define the tabs
                     ),
                   ),
                   pinned: true,                     // Pin the tab bar to the top.
                 ),
               ];
             },
-            body: TabBarView(                     // Create the TabBarView to display tab content.
-              children: _tabs                     // Map the _tabs list to create tab content.
-                  .map((e) => Center(             // Center the content of each tab.
-                child: Text("${e.text}", textAlign: TextAlign.center), // Display the tab's text.
-              ))
-                  .toList(), // Convert the iterable to a list.
+            body:  const TabBarView(                     // Create the TabBarView to display tab content.
+              children: [
+                Center(child: Text("Test 1", textAlign: TextAlign.center)),
+                Center(child: Text("Test 2", textAlign: TextAlign.center)),
+                Center(child: Text("Test 3", textAlign: TextAlign.center)),
+              ],
             ),
           ),
         ),),
@@ -96,7 +97,7 @@ class MyHomePage extends StatelessWidget {
         onPressed: () {                           // Define the action when the button is pressed.
           Navigator.push(                         // Navigate to the BarcodeScannerScreen.
             context,
-            MaterialPageRoute(builder: (context) => const BarcodeScannerScreen()),
+            MaterialPageRoute(builder: (context) => BarcodeScannerScreen()),
           );
         },
         tooltip: 'Scan Barcode', // Set the tooltip for the button.
@@ -105,12 +106,9 @@ class MyHomePage extends StatelessWidget {
     );
   }
 }
+
+
 //*******************************************************************************
-const _tabs = [ // Define a list of tabs.
-  Tab(icon: Icon(Icons.home_rounded, color: Colors.black), text: "Home"),
-  Tab(icon: Icon(Icons.kitchen_rounded, color: Colors.black), text: "Inventory"),
-  Tab(icon: Icon(Icons.person, color: Colors.black), text: "Profile"),
-];
 
 class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate { // Custom delegate for the tab bar.
   _SliverAppBarDelegate(this._tabBar); // Constructor, taking the TabBar as input.
@@ -135,18 +133,12 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate { // Custom d
 }
 
 //*******************************************************************************
-class BarcodeScannerScreen extends StatelessWidget {
-  const BarcodeScannerScreen({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Barcode Scanner'),
-      ),
-      body: const Center(
-        child: Text('Barcode Scanner will be implemented here'),
-      ),
-    );
-  }
-}
+const _tabs = [ // Define a list of tabs.
+  Tab(icon: Icon(Icons.home_rounded, color: Colors.black), text: "Home"),
+  Tab(icon: Icon(Icons.kitchen_rounded, color: Colors.black), text: "Inventory"),
+  Tab(icon: Icon(Icons.person, color: Colors.black), text: "Profile"),
+];
+
+
+
